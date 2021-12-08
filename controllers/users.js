@@ -15,7 +15,7 @@ usersRouter.post("/", async (request, response) => {
   if (body.email.length < 3 || body.password.length < 3) {
     return response
       .status(400)
-      .json({ error: "username and password length must be greater than 3" })
+      .json({ error: "email and password length must be greater than 3" })
       .end();
   }
 
