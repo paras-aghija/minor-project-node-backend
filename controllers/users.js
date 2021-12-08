@@ -6,13 +6,13 @@ usersRouter.post("/", async (request, response) => {
   const body = request.body;
 
   const saltRounds = 10;
-  if (!body.username || !body.password) {
+  if (!body.email || !body.password) {
     return response
       .status(400)
       .json({ error: "body and password are required" })
       .end();
   }
-  if (body.username.length < 3 || body.password.length < 3) {
+  if (body.email.length < 3 || body.password.length < 3) {
     return response
       .status(400)
       .json({ error: "username and password length must be greater than 3" })
@@ -22,8 +22,10 @@ usersRouter.post("/", async (request, response) => {
   const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
   const user = new User({
-    username: body.username,
+    email: body.email,
     name: body.name,
+    age: body.age,
+    phone: body.phone,
     passwordHash,
   });
 
